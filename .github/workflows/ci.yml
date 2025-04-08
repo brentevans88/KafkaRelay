@@ -1,0 +1,17 @@
+name: Continuous Integration
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - 'develop'
+      - 'feature/**'
+  pull_request:
+
+jobs:
+  build:
+    uses: HawkEyeInnovations/GithubSharedWorkflows/.github/workflows/java-shared-ci.yml@v0.1.20
+    with:
+      var_path: './buildvars.json'
+      operating_system: 'amazon'
+      build_message: ${{ github.event.pull_request.title || github.event.head_commit.message }}
+    secrets: inherit

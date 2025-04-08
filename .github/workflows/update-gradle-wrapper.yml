@@ -1,0 +1,10 @@
+name: Update Gradle Wrapper
+
+on:
+  schedule:
+    - cron: "0 0 * * 2" # Every Tuesday around midnight
+
+jobs:
+  update-gradle-wrapper:
+    uses: HawkEyeInnovations/GithubSharedWorkflows/.github/workflows/update-gradle-wrapper.yml@v0.1.20
+    secrets: inherit

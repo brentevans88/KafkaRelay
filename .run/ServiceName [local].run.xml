@@ -1,0 +1,13 @@
+<component name="ProjectRunConfigurationManager">
+    <configuration default="false" name="ServiceName [local]" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+        <module name="ServiceName.ServiceName.main"/>
+        <option name="SPRING_BOOT_MAIN_CLASS" value="com.hawkeyeinnovations.sport.service_name.Application"/>
+        <option name="ACTIVE_PROFILES" value="local"/>
+        <option name="PROGRAM_PARAMETERS" value="--add-modules java.se --add-exports java.base/jdk.internal.ref=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.management/sun.management=ALL-UNNAMED --add-opens jdk.management/com.sun.management.internal=ALL-UNNAMED"/>
+        <option name="ALTERNATIVE_JRE_PATH"/>
+        <option name="SHORTEN_COMMAND_LINE" value="NONE"/>
+        <method v="2">
+            <option name="Make" enabled="true"/>
+        </method>
+    </configuration>
+</component>

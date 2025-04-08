@@ -1,0 +1,38 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        maven {
+            allowInsecureProtocol = true
+            url = "${artifactory_contextUrl}/libs-release-local"
+            credentials {
+                username = "${artifactory_user}"
+                password = "${artifactory_password}"
+            }
+        }
+    }
+}
+
+boolean isCiServer = System.getenv().containsKey("CI")
+buildCache {
+    local {
+        enabled = false
+    }
+    remote(HttpBuildCache) {
+        url = "${artifactory_contextUrl}/gradle-build/"
+        allowInsecureProtocol = true
+        push = isCiServer
+        credentials {
+            username = artifactory_user
+            password = artifactory_password
+        }
+    }
+}
+
+// Required as in MultiBranch builds this name is appended with branch/PR name
+rootProject.name = 'ServiceName'
+include 'Service', 'Model'
+
+
+// This ensures the artifacts are named correctly
+project(':Model').name = 'ServiceModel'
+project(':Service').name = rootProject.name

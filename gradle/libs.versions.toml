@@ -1,0 +1,33 @@
+[versions]
+hawkeyeGradlePlugin = "4.3.0"
+springBoot = "3.2.2"
+springDoc = "2.3.0"
+disruptor = "4.0.0"
+
+[libraries]
+spring-boot-web = { module = "org.springframework.boot:spring-boot-starter-web" }
+spring-boot-validation = { module = "org.springframework.boot:spring-boot-starter-validation" }
+spring-boot-actuator = { module = "org.springframework.boot:spring-boot-starter-actuator" }
+spring-boot-log4j2 = { module = "org.springframework.boot:spring-boot-starter-log4j2" }
+spring-boot-configuration-processor = { module = "org.springframework.boot:spring-boot-configuration-processor" }
+
+jackson-core = { module = "com.fasterxml.jackson.core:jackson-core" }
+jackson-blackbird = { module = "com.fasterxml.jackson.module:jackson-module-blackbird" }
+jackson-databind = { module = "com.fasterxml.jackson.core:jackson-databind" }
+jackson-jsr310 = { module = "com.fasterxml.jackson.datatype:jackson-datatype-jsr310" }
+jackson-xml = { module = "com.fasterxml.jackson.dataformat:jackson-dataformat-xml" }
+lombok = { module = "org.projectlombok:lombok" }
+slf4j-api = { module = "org.slf4j:slf4j-api" }
+springdoc-webmvc-ui = { module = "org.springdoc:springdoc-openapi-starter-webmvc-ui", version.ref = "springDoc" }
+disruptor = { module = "com.lmax:disruptor", version.ref = "disruptor" }
+
+# Test Libraries
+junit-jupiter = { module = "org.junit.jupiter:junit-jupiter" }
+hamcrest = { module = "org.hamcrest:hamcrest" }
+mockito-core = { module = "org.mockito:mockito-core" }
+mockito-jupiter = { module = "org.mockito:mockito-junit-jupiter" }
+spring-boot-test = { module = "org.springframework.boot:spring-boot-starter-test" }
+
+[plugins]
+hawkeye-gradle = { id = 'com.hawkeyeinnovations.hawkeye-gradle-plugin', version.ref = "hawkeyeGradlePlugin" }
+spring-boot = { id = 'org.springframework.boot', version.ref = "springBoot" }

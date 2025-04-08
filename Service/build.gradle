@@ -1,0 +1,63 @@
+plugins {
+    alias libs.plugins.spring.boot
+}
+
+configurations.all {
+    exclude group: "org.springframework.boot", module: "spring-boot-starter-logging"
+    exclude group: "ch.qos.logback"
+}
+
+dependencies {
+    implementation project(":ServiceModel")
+
+    implementation libs.spring.boot.web
+    implementation libs.spring.boot.validation
+    implementation libs.spring.boot.actuator
+    implementation libs.spring.boot.log4j2
+    implementation libs.disruptor
+    annotationProcessor libs.spring.boot.configuration.processor
+
+    implementation libs.springdoc.webmvc.ui
+
+    testImplementation libs.spring.boot.test
+}
+
+springBoot {
+    buildInfo()
+}
+
+bootJar {
+    manifest {
+        attributes("Implementation-Version": project.version)
+    }
+}
+
+bootBuildImage {
+    buildpacks = ["gcr.io/paketo-buildpacks/adoptium", "urn:cnb:builder:paketo-buildpacks/java", "gcr.io/paketo-buildpacks/health-checker:latest"]
+    pullPolicy = "IF_NOT_PRESENT"
+    imageName = "794740048381.dkr.ecr.eu-west-2.amazonaws.com/hawk-eye/<registry-service-name>:${version}"
+    environment["BP_SPRING_CLOUD_BINDINGS_DISABLED"] = "true"
+    environment["BP_HEALTH_CHECKER_ENABLED"] = "true"
+    environment["BPE_DELIM_JAVA_TOOL_OPTIONS"] = " "
+    environment["BPE_APPEND_JAVA_TOOL_OPTIONS"] = "--add-opens=java.management/sun.management=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/sun.net=ALL-UNNAMED"
+    buildCache {
+        volume {
+            name = "cache-${rootProject.name}.build"
+        }
+    }
+    launchCache {
+        volume {
+            name = "cache-${rootProject.name}.launch"
+        }
+    }
+}
+
+tasks.register('dockerImage') {
+    println("${bootBuildImage.imageName.get()}")
+}
+
+ftpPublish {
+    transfers = [
+        '/_Releases/<service-name>': layout.files("build/libs/${project.name}-${project.version}.jar")
+    ]
+}

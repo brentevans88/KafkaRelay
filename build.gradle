@@ -1,0 +1,33 @@
+import org.springframework.boot.gradle.plugin.SpringBootPlugin
+
+plugins {
+    alias libs.plugins.hawkeye.gradle
+    alias libs.plugins.spring.boot apply false
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'io.spring.dependency-management'
+
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+
+    dependencyManagement {
+        imports {
+            mavenBom SpringBootPlugin.BOM_COORDINATES
+        }
+    }
+
+    dependencies {
+        compileOnly libs.lombok
+        annotationProcessor libs.lombok
+
+        implementation libs.jackson.databind
+        implementation "com.github.spotbugs:spotbugs-annotations:${spotbugs.toolVersion.get()}"
+
+        testCompileOnly libs.lombok
+        testAnnotationProcessor libs.lombok
+
+        testImplementation libs.hamcrest
+    }
+}

@@ -1,0 +1,15 @@
+name: Continuous Delivery
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - 'release/**'
+      - '**/release/**'
+
+jobs:
+  release:
+    uses: HawkEyeInnovations/GithubSharedWorkflows/.github/workflows/java-shared-cd.yml@v0.1.20
+    with:
+      var_path: './buildvars.json'
+      operating_system: 'amazon'
+    secrets: inherit

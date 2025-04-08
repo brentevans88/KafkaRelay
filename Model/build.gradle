@@ -1,0 +1,27 @@
+plugins {
+    id 'java-library'
+    id 'java-test-fixtures'
+}
+
+dependencies {
+    implementation libs.slf4j.api
+
+    implementation libs.jackson.jsr310
+    implementation libs.jackson.xml
+
+    testImplementation libs.junit.jupiter
+    testImplementation libs.mockito.core
+    testImplementation libs.mockito.jupiter
+}
+
+java {
+    withSourcesJar()
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+}

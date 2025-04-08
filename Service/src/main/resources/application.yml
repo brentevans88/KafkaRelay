@@ -1,0 +1,21 @@
+server:
+  port: 9081
+  servlet:
+    context-path: /serviceName
+
+management:
+  endpoints:
+    web.exposure.include: info,health,metrics,env
+
+springdoc:
+  packagesToScan: com.hawkeyeinnovations.sport.service_name.controller
+
+---
+spring.config.activate.on-profile: local
+
+logging:
+  file:
+    name: ./log/ServiceName.log
+  pattern:
+    console: "%clr{%d{yyyy-MM-dd HH:mm:ss.SSS}}{faint} %clr{%5p} %clr{:}{faint} %m%n%xwEx"
+    file: "%d{yyyy-MM-dd HH:mm:ss.SSS} %5p ${pid} ---  [%t] %-40.40c{1.} : %X{correlation_id} : %m%n%xwEx"

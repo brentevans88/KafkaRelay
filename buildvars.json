@@ -1,0 +1,10 @@
+{
+    "jdk"                   : "17",
+    "artifactoryPublish"    : true,
+    "publishJacoco"         : true,
+    "publishSpotBugs"       : true,
+    "ftpPublish"            : true,
+    "docker"                : true,
+    "dependencyCheck"       : true,
+    "createExe"             : true
+}
