@@ -1,7 +1,7 @@
 [versions]
 hawkeyeGradlePlugin = "4.3.0"
 springBoot = "3.2.2"
-springDoc = "2.3.0"
+springDoc = "2.8.13"
 disruptor = "4.0.0"
 
 [libraries]
